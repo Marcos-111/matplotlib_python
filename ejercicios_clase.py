@@ -35,6 +35,18 @@ def ej1():
     # para generar los valores que toma "Y" por cada valor de "X"
     y = [i**2 for i in x]
 
+    fig = plt.figure()
+    ax = fig.add_subplot()
+
+    ax.plot(x, y, color='r', label= "y1 = x**2")       
+    ax.set_facecolor('whitesmoke')
+    ax.set_title("Ej 1")
+    ax.set_ylabel("y1 = x**2")
+    ax.legend()
+    
+    
+    plt.show()
+    
     # Crear una "figura" y crear un "ax" con add_subplot
     # Graficar el "line plot" de "Y" en función de "X"
     # Colocar la leyenda y el label con el nombre de la función
@@ -56,6 +68,21 @@ def ej2():
     y1 = [i**2 for i in x]
     y2 = [i**3 for i in x]
 
+    fig = plt.figure()
+    ax = fig.add_subplot()
+
+    ax.plot(x, y1, color='y', label= "y1 = x**2")
+    ax.plot(x, y2, color='g', label= "y2 = x**3")        
+    ax.set_facecolor('black')
+    ax.set_title("Ej 2")
+    
+    ax.legend()
+    
+    
+    plt.show()
+    
+    
+    
     # Realizar un gráfico que representen las dos funciones
     # Para ello se debe llamar dos veces a "plot" con el mismo "ax"
 
@@ -85,6 +112,17 @@ def ej3():
 
     # Elegir un marker a elección
 
+    fig = plt.figure()
+    fig.suptitle('ej 3', fontsize=16)
+    ax1 = fig.add_subplot()
+    
+
+   
+    ax1.scatter(x, y, color='purple', marker= 'x')
+    ax1.set_facecolor('yellow')
+    ax1.grid('solid')
+    plt.show()
+
 
 def ej4():
     # Figura con múltiples gráficos
@@ -106,6 +144,38 @@ def ej4():
     y3 = x**4
     y4 = np.sqrt(x)
 
+    gs = gridspec.GridSpec(2, 2)     
+    fig = plt.figure()
+    fig.suptitle('ej 4', fontsize=16)
+
+    ax1 = fig.add_subplot(gs[0, 0])  
+    ax2 = fig.add_subplot(gs[0, 1])  
+    ax3 = fig.add_subplot(gs[1, 0])  
+    ax4 = fig.add_subplot(gs[1, 1])
+    
+
+    ax1.plot(x, y1, color='white', label='y1 = x**2')
+    ax1.set_facecolor('black')
+    ax1.legend()
+    ax1.grid()
+
+    ax2.plot(x, y2, color='darkblue', label='y2 = x**3')
+    ax2.set_facecolor('whitesmoke')
+    ax2.legend()
+    ax2.grid('solid')
+
+    ax3.plot(x, y3, color='black', label='y3 = x**4')
+    ax3.set_facecolor('orange')
+    ax3.legend()
+    ax3.grid(ls = 'dashed')
+    
+    ax4.plot(x, y4, color='green', label='y4 = np.sqrt(x)')
+    ax4.set_facecolor('yellow')
+    ax4.legend()
+    ax4.grid(ls = 'dashdot')
+    plt.show()
+
+    
     # Esos tres gráficos deben estar colocados
     # en la diposición de 3 filas y 1 columna:
     # ------
@@ -126,8 +196,7 @@ def ej4():
 
 if __name__ == '__main__':
     print("Bienvenidos a otra clase de Inove con Python")
-    ej1()
-    # ej2()
-    # ej2()
-    # ej3()
-    # ej4()
+    #ej1()
+    #ej2()
+    #ej3()
+    ej4()
