@@ -15,7 +15,12 @@ __author__ = "Inove Coding School"
 __email__ = "alumnos@inove.com.ar"
 __version__ = "1.1"
 
-
+import math
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.axes
+import matplotlib.gridspec as gridspec
+import csv
 '''
 NOTA PARA TODOS LOS EJERCICIOS
 
@@ -91,6 +96,31 @@ def ej1():
     y = mes_1[:, 2]
 
     '''
+    data = np.genfromtxt('ventas.csv', delimiter=',') 
+
+    dataset = data[1:,:]
+
+    filas_mes_1 = dataset[:, 0] == 1
+    
+    mes_1 = dataset[filas_mes_1, :]
+
+    x = mes_1[:, 1]
+
+    y = mes_1[:, 2]
+
+    fig = plt.figure()
+    fig.suptitle('ej 1', fontsize=14)
+    ax = fig.add_subplot()
+
+    ax.plot(x, y, c='darkred', marker='^', ms=10, label='Datos alimentos mes 1')
+    ax.legend()
+    ax.grid()
+    
+    ax.set_facecolor('whitesmoke')
+    plt.show()
+
+
+
 
 
 def ej2():
@@ -120,6 +150,21 @@ def ej2():
 
     '''
 
+    data = np.genfromtxt('ventas.csv', delimiter=',') 
+    dataset = data[1:,:]
+    alimentos = dataset[:, 2]
+    tendencia = np.diff(alimentos)
+
+    fig = plt.figure()
+    fig.suptitle('ej 2', fontsize=14)
+    ax = fig.add_subplot()
+
+    ax.plot(tendencia, c='darkred', marker='^', ms=10, label='Ventas alimentos')
+    ax.legend()
+    ax.grid()
+    
+    ax.set_facecolor('whitesmoke')
+    plt.show()
 
 def ej3():
     print("Buscando la tendencia")
@@ -135,7 +180,29 @@ def ej3():
     ventas de electrodomésticos.
 
     '''
+    
+    
+    data = np.genfromtxt('ventas.csv', delimiter=',') 
+    dataset = data[1:,:]
+    electrodomesticos = dataset[:, 5]
+    lista = [1 if x != 0 else 0 for x in electrodomesticos]
+    
+    
+    fig = plt.figure()
+    fig.suptitle('ej 2', fontsize=14)
+    ax = fig.add_subplot()
 
+    ax.plot(lista, c='darkred', marker='^', ms=10, label='Ventas alimentos')
+    ax.legend()
+    ax.grid()
+    
+    ax.set_facecolor('whitesmoke')
+    plt.show()
+
+
+
+
+    
 
 def ej4():
     print("Exprimiendo los datos")
@@ -158,9 +225,118 @@ def ej4():
     del año
     '''
 
+    data = np.genfromtxt('ventas.csv', delimiter=',') 
+    dataset = data[1:,:]
+    electrodomesticos = dataset[:, 5]
+    limpieza = dataset[:, 4]
+    bazar = dataset[:, 3]
+    alimentos = dataset[:, 2]
+
+    total_elec = np.sum(electrodomesticos, axis=0)
+    total_limp = np.sum(limpieza, axis=0)
+    total_bazar = np.sum(bazar, axis=0)
+    total_alim = np.sum(alimentos, axis=0)
+
+    labels = ['Electrodomesticos', 'Limpieza', 'Bazar', 'Alimentos' ]
+    datos = [total_elec, total_limp, total_bazar, total_alim]
+    fig = plt.figure()
+    fig.suptitle('ej 4 - facturacion total', fontsize=16)
+    ax = fig.add_subplot()
+
+    ax.pie(datos, labels= labels, autopct='%1.1f%%', shadow=True, startangle=90)
+    ax.axis('equal')
+    plt.show()
+
+    #no supe como aplicar labels correctamente
+
 
 def ej5():
     print("Ahora sí! buena suerte :)")
+
+    data = np.genfromtxt('ventas.csv', delimiter=',') 
+
+    dataset = data[1:,:]
+
+    filas_mes_1 = dataset[:, 0] == 1
+    
+    mes_1 = dataset[filas_mes_1, :]
+
+    a = mes_1[:, 2]
+
+    b = mes_1[:, 3]
+
+    c = mes_1[:, 4]
+
+    d = mes_1[:, 5]
+
+    total_alim1 = np.sum(a, axis=0)
+    total_bazar1 = np.sum(b, axis=0)
+    total_limp1 = np.sum(c, axis=0)
+    total_elec1 = np.sum(d, axis=0)
+
+    datos1 = [total_alim1, total_bazar1, total_limp1, total_elec1]
+
+    filas_mes_2 = dataset[:, 0] == 2
+
+    mes_2 = dataset[filas_mes_2, :]
+
+    e = mes_2[:, 2]
+
+    f = mes_2[:, 3]
+
+    g = mes_2[:, 4]
+
+    h = mes_2[:, 5]
+
+    total_alim2 = np.sum(e, axis=0)
+    total_bazar2 = np.sum(f, axis=0)
+    total_limp2 = np.sum(g, axis=0)
+    total_elec2 = np.sum(h, axis=0)
+
+    datos2 = [total_alim2, total_bazar2, total_limp2, total_elec2]
+
+    filas_mes_3 = dataset[:, 0] == 3
+
+    mes_3 = dataset[filas_mes_3, :]
+
+    i = mes_3[:, 2]
+
+    j = mes_3[:, 3]
+
+    k = mes_3[:, 4]
+
+    l = mes_3[:, 5]
+
+    total_alim3 = np.sum(i, axis=0)
+    total_bazar3 = np.sum(j, axis=0)
+    total_limp3 = np.sum(k, axis=0)
+    total_elec3 = np.sum(l, axis=0)
+    
+    datos3 = [total_alim3, total_bazar3, total_limp3, total_elec3]
+
+    categorias = [1, 2, 3, 4]
+    categorias_label = ['Alimentos', 'Bazar', 'Limpieza', 'Electrodomesticos']
+
+    fig = plt.figure()
+    fig.suptitle('ej 5', fontsize=16)
+    ax1 = fig.add_subplot(3, 1, 1)
+    ax2 = fig.add_subplot(3, 1, 2)
+    ax3 = fig.add_subplot(3, 1, 3)
+
+    ax1.bar(categorias_label, datos1, label='mes 1')
+    ax1.set_facecolor('whitesmoke')
+    ax1.legend()
+
+    ax2.bar(categorias_label, datos2, label='mes 2')
+    ax2.set_facecolor('whitesmoke')
+    ax2.legend()
+
+    ax3.bar(categorias_label, datos3, label='mes 3')
+    ax3.set_facecolor('whitesmoke')
+    ax3.legend()
+    plt.show()
+    
+
 
     '''
     Ahora que ya hemos jugado un poco con nuestro dataset,
@@ -185,8 +361,8 @@ def ej5():
 
 if __name__ == '__main__':
     print("Ejercicios de práctica")
-    ej1()
-    # ej2()
-    # ej3()
-    # ej4()
-    # ej5()
+    #ej1()
+    #ej2()
+    #ej3()
+    ej4()
+    ej5()
